@@ -9,7 +9,7 @@
         crossorigin="anonymous">
     <link rel="stylesheet" href="assets/stylesheets/game.min.css">
     <title>Slap Game</title>
-</head>
+</head>id = "itemBtn" 
 
 <body>
     <div class="container-fluid">
@@ -20,19 +20,19 @@
                     <span id="happinessCount">Sad Dog</h3>
                 <h3>Reward Count:
                     <span id="rewardCount">0</h3>
-                <img class="dog-image" src="assets/photos/dog-wagging-tail.jpg" alt="">
+                <span class="dog-image" id="koAlert" onchange="koAlert()"><img  src="assets/photos/dog-wagging-tail.jpg" alt=""></span>
                 <div>
                     <button class="btn-danger" onClick="reward('earScratch',0)">Ear Scratch</button>
                     <button class="btn-primary" onClick="reward('bellyRub',0)">Belly Rub</button>
                     <button class="btn-info" onClick="reward('dogTreat',0)">Dog Treat</button>
                 </div>
                 <div>
-                    <button class="btn-danger" onClick="giveStatus('fat',0)">Fat</button>
-                    <button class="btn-primary" onClick="giveStatus('lazy',0)">Lazy</button>
-                    <button class="btn-info" onClick="giveStatus('hungry',0)">Hungry</button>
+                    <button class="btn-danger" id = "itemBtn" onClick="giveStatus('fat',0)">Fat</button>
+                    <button class="btn-primary" id = "itemBtn" onClick="giveStatus('lazy',0)">Lazy</button>
+                    <button class="btn-info" id = "itemBtn" onClick="giveStatus('hungry',0)">Hungry</button>
                 </div>
                 <div>
-                    <button class="btn-danger" onClick="reset()">Disappoint your animal again?</button>
+                    <button class="btn-danger" onClick="reset(0)">Disappoint your animal again?</button>
                 </div>
 
             </div>

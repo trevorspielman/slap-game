@@ -1,8 +1,11 @@
 var animals = []
 var happiness = 0
 var rewardCount = 0
+//var koAlert = '<img  src="https://media.giphy.com/media/kYnoJzl8aBWIU/giphy.gif">'
 var happinessElem = document.getElementById("happinessCount")
 var rewardCountElem = document.getElementById("rewardCount")
+var itemBtnElem = document.getElementById("itemBtn")
+//var koAlertElem = document.getElementById("koAlert")
 
 //Animal constructor object
 function Animal(name, img) {
@@ -11,7 +14,7 @@ function Animal(name, img) {
     this.img = img
     this.items = []
     //available items
-}
+    }
 
 
 //setActiveAnimal
@@ -58,12 +61,15 @@ function giveStatus(type, index) {
     var animal = animals[index] //passing the index of the array into this function. Without it the array isn't being referenced for these properties.
     if (type == "fat") {
         animal.items.push(statusMods.fat) //have to have the "statusMods.fat" so the funciton can access the global variable.
+        itemBtnElem.disabled = true //works to disable button after one click
     }
     if (type == "lazy") {
         animal.items.push(statusMods.lazy)
+        itemBtnElem.disabled = true // doesn't work to disable button after click.
     }
     if (type == "hungry") {
         animal.items.push(statusMods.hungry)
+        itemBtnElem.disabled = true
     }
     update(index)
 }
@@ -98,14 +104,23 @@ function rewardCounter(index) {
     rewardCountElem.innerText = rewardCount++
 }
 
-function reset(index){
+/* function koAlert(index){
     var animal = animals[index]
-    animal.happiness = 0
-    happinessCount = "Sad Dog"
-    rewardCount = 0
-}
+    if(happiness >= 100){
+        koAlertElem.innerHTML = koAlert
+        return koAlert
+    }
+} */
 
+/* function reset(index){
+    var animal = animals[index]
+    var oldProto = animal.prototype
+    function animal() {
+   this.happiness = 0;
+}
+animal.prototype = oldProto;
+} */
 
 update(0)
 rewardCounter(0)
-reset(0)
+//reset(0)
