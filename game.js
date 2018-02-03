@@ -35,7 +35,7 @@ function reward(type, index) {
     if (type == "bellyRub") {
         animal.happiness += 5 + addMods(index)
     }
-    if (type == "dogTreat") {
+    if (type == "fetch") {
         animal.happiness += 10 + addMods(index)
     }
     rewardCounter(index)
@@ -43,25 +43,27 @@ function reward(type, index) {
 }
 
 //Status Modifier object
-function Status(name, modifier, description) {
+function Status(name, modifier, description, enabled) {
     this.name = name
     this.modifier = modifier
     this.description = description
-    //this.enabled = enabled // this object will eventually be how I make sure that status can only be applied once. Figure out how to identify if it's been clicked before and disable further clicks.
+    this.enabled = enabled // this object will eventually be how I make sure that status can only be applied once. Figure out how to identify if it's been clicked before and disable further clicks.
 }
 //Status dictionary for status modifiers
 var statusMods = {
-    fat: new Status("Fat", 1, "Fatness decreases treat satisfaction!!"),
-    lazy: new Status("Lazy", 5, "Honestly, who doesn't love belly rubs?"),
-    hungry: new Status("Hungry", -2, "Full Belly = Happiness Eternal")
+    fat: new Status("Fat", 1, "Fatness decreases treat satisfaction!!", true),
+    lazy: new Status("Lazy", 5, "Honestly, who doesn't love belly rubs?", true),
+    hungry: new Status("Hungry", -2, "Full Belly = Happiness Eternal", true)
 }
 
 //function to push a status from the global items object into the items array on the target animal
-function giveStatus(type, index) {
-    var animal = animals[index] //passing the index of the array into this function. Without it the array isn't being referenced for these properties.
+function giveStatus(type, index, status) {
+    var animal = animals[index]  //passing the index of the array into this function. Without it the array isn't being referenced for these properties.
     if (type == "fat") {
-        animal.items.push(statusMods.fat) //have to have the "statusMods.fat" so the funciton can access the global variable.
-        itemBtnElem.disabled = true //works to disable button after one click
+        animal.items.push(statusMods.fat)
+     } //have to have the "statusMods.fat" so the funciton can access the global variable.
+        if (animal.items.includes(statusMods.fat)){
+        statusMods.fat.enabled = false //works to disable button after one click
     }
     if (type == "lazy") {
         animal.items.push(statusMods.lazy)
@@ -112,15 +114,18 @@ function rewardCounter(index) {
     }
 } */
 
-/* function reset(index){
+function reset(index){
     var animal = animals[index]
-    var oldProto = animal.prototype
-    function animal() {
-   this.happiness = 0;
+    for (let i = 0; i < animals.length; i++) {
+        const animal = animals[index];
+        rewardCount = 0
+        animal.happiness = 0
+        animal.items = []
+        happinessElem.innerText = animal.happiness
+    }
+    rewardCounter()
+    update(0)
 }
-animal.prototype = oldProto;
-} */
 
 update(0)
 rewardCounter(0)
-//reset(0)

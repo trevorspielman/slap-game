@@ -9,7 +9,7 @@
         crossorigin="anonymous">
     <link rel="stylesheet" href="assets/stylesheets/game.min.css">
     <title>Slap Game</title>
-</head>id = "itemBtn" 
+</head>
 
 <body>
     <div class="container-fluid">
@@ -22,9 +22,9 @@
                     <span id="rewardCount">0</h3>
                 <span class="dog-image" id="koAlert" onchange="koAlert()"><img  src="assets/photos/dog-wagging-tail.jpg" alt=""></span>
                 <div>
-                    <button class="btn-danger" onClick="reward('earScratch',0)">Ear Scratch</button>
-                    <button class="btn-primary" onClick="reward('bellyRub',0)">Belly Rub</button>
-                    <button class="btn-info" onClick="reward('dogTreat',0)">Dog Treat</button>
+                    <button onClick="reward('earScratch',0)"><img class="button-image" src="assets/photos/pet.svg"> <p>Ear Scratches</p></button>
+                    <button onClick="reward('bellyRub',0)"><img class="button-image" src="assets/photos/belly-rub.png"> <p>Belly Rubs</p></button>
+                    <button onClick="reward('fetch',0)"><img class="button-image" src="assets/photos/ball.png"> <p>Fetch</p></button>
                 </div>
                 <div>
                     <button class="btn-danger" id = "itemBtn" onClick="giveStatus('fat',0)">Fat</button>
