@@ -1,16 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="assets/stylesheets/style.min.css">
-    <title>SLap Game</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/stylesheets/game.min.css">
+    <title>Slap Game</title>
 </head>
-<body>
-    
 
-    <script src="app.js"></script>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6 offset-3">
+                <h1>Bosco</h1>
+                <h3>Happiness:
+                    <span id="happinessCount">Sad Dog</h3>
+                <h3>Reward Count:
+                    <span id="rewardCount">0</h3>
+                <img class="dog-image" src="assets/photos/dog-wagging-tail.jpg" alt="">
+                <div>
+                    <button class="btn-danger" onClick="reward('earScratch',0)">Ear Scratch</button>
+                    <button class="btn-primary" onClick="reward('bellyRub',0)">Belly Rub</button>
+                    <button class="btn-info" onClick="reward('dogTreat',0)">Dog Treat</button>
+                </div>
+                <div>
+                    <button class="btn-danger" onClick="giveStatus('fat',0)">Fat</button>
+                    <button class="btn-primary" onClick="giveStatus('lazy',0)">Lazy</button>
+                    <button class="btn-info" onClick="giveStatus('hungry',0)">Hungry</button>
+                </div>
+                <div>
+                    <button class="btn-danger" onClick="reset()">Disappoint your animal again?</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
 </body>
+
 </html>
