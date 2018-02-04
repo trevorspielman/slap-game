@@ -18,8 +18,8 @@
                 <h3>Choose yo' Dog:</h3>
                 <div>
                     <button onClick="animalType('bosco',0)">Bosco</button>
-                    <button>Sire Fluffy Pants</button>
-                    <button>Moon Moon</button>
+                    <button onClick="animalType('fluffyPants',1)">Sire Fluffy Pants</button>
+                    <button onClick="animalType('moonMoon',2)">Moon Moon</button>
                 </div>
                 <h3>Treat yo' Dog?</h3>
                 <div class="treat-buttons m-1">
@@ -55,14 +55,14 @@
                     <button class="btn-danger m-1" onClick="reset(0)">Disappoint your dog again?</button>
                 </div>
             </div>
-            <span id="selectAnimal">
-<!--             <div class="col-sm-4">
+            <div class="col-sm-4" id="selectAnimal">
+<!--             <span>
                 <h1>Bosco</h1>
                 <span class="dog-image" id="koAlert" onchange="koAlert()">
                     <img class="dog-image" src="assets/photos/sir-bosco.jpg" alt="">
                 </span>
-            </div> -->
-        </span>
+            </span> -->
+            </div>
             <div class="col-sm-4">
                 <h3>Happiness:
                     <span id="happinessCount">Sad Dog</h3>

@@ -7,15 +7,16 @@ var rewardCountElem = document.getElementById("rewardCount")
 //var koAlertElem = document.getElementById("koAlert")
 
 //animal variables
-var dog = new Animal("Bosco", "assets/photos/sir-bosco.jpg")
-var cat = new Animal("Sire Fluffy Pants", "assets/photos/dog-wagging-tail.jpg")
-//var fish = new Animal("Miss Bubbles", "assets/photos/dog-wagging-tail.jpg")
+var dog1 = new Animal("Gentleman Bosco", "Loves Everything and Everyone in the world", "assets/photos/sir-bosco.jpg")
+var dog2 = new Animal("Sire Fluffy Pants", "He may be small, but he's the king of his own domain", "assets/photos/sire-fluffy-pants.jpg")
+var dog3 = new Animal("Moon Moon", "LOL, I can hear the rocks!", "assets/photos/moon-moon.jpg")
 
-animals.push(dog)
+animals.push(dog1, dog2, dog3)
 
 //Animal constructor object
-function Animal(name, img) {
+function Animal(name, description, img) {
     this.name = name
+    this.description = description
     this.happiness = 0
     this.img = img
     this.items = []
@@ -26,24 +27,30 @@ function Animal(name, img) {
 function animalType(type, index){
     var animal = animals[index]
     if (type == "bosco"){
-        drawAnimal(animal.cat)
+        drawAnimal(0)
+    }
+    if (type == "fluffyPants"){
+        drawAnimal(1)
+    }
+    if (type == "moonMoon"){
+        drawAnimal(2)
     }
 }
-//function
-//for and if statements to determine dog type
 
+//drawing the animals to the page funciton
 function drawAnimal(index) {
     var template = ``
     var animalElem = document.getElementById("selectAnimal")
     for (let i = 0; i < animals.length; i++) {
         const animal = animals[index]
-        template += `
-        <div class="col-sm-4">
+        template = `
+        <span>
                 <h1>${animal.name}</h1>
+                <p>${animal.description}</p>
                 <span id="koAlert" onchange="koAlert()">
                     <img class="dog-image" src="${animal.img}">
                 </span>
-            </div>
+        </span>
         `
     }
     animalElem.innerHTML = template
