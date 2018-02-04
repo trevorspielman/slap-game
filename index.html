@@ -14,29 +14,64 @@
 <body>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-6 offset-3">
+            <div class="col-sm-4">
+                <h3>Choose yo' Dog:</h3>
+                <div>
+                    <button onClick="animalType('bosco',0)">Bosco</button>
+                    <button>Sire Fluffy Pants</button>
+                    <button>Moon Moon</button>
+                </div>
+                <h3>Treat yo' Dog?</h3>
+                <div class="treat-buttons m-1">
+                    <button onClick="reward('earScratch',0)">
+                        <img class="button-image" src="assets/photos/pet.svg">
+                        <p>Ear Scratches</p>
+                    </button>
+                    <button onClick="reward('bellyRub',0)">
+                        <img class="button-image" src="assets/photos/belly-rub.png">
+                        <p>Belly Rubs</p>
+                    </button>
+                    <button onClick="reward('fetch',0)">
+                        <img class="button-image" src="assets/photos/ball.png">
+                        <p>Fetch</p>
+                    </button>
+                </div>
+                <div class="status-buttons m-1">
+                    <h3>How's Your Dog Feeling?</h3>
+                    <button onClick="giveStatus('fat',0)">
+                        <img class="button-image" src="assets/photos/fat-dog.png">
+                        <p>Fat</p>
+                    </button>
+                    <button onClick="giveStatus('lazy',0)">
+                        <img class="button-image" src="assets/photos/lazy-dog.png">
+                        <p>zZz Lazy zZz</p>
+                    </button>
+                    <button onClick="giveStatus('hungry',0)">
+                        <img class="button-image" src="assets/photos/dog-bowl.png">
+                        <p>Hungry!</p>
+                    </button>
+                </div>
+                <div>
+                    <button class="btn-danger m-1" onClick="reset(0)">Disappoint your dog again?</button>
+                </div>
+            </div>
+            <span id="selectAnimal">
+<!--             <div class="col-sm-4">
                 <h1>Bosco</h1>
+                <span class="dog-image" id="koAlert" onchange="koAlert()">
+                    <img class="dog-image" src="assets/photos/sir-bosco.jpg" alt="">
+                </span>
+            </div> -->
+        </span>
+            <div class="col-sm-4">
                 <h3>Happiness:
                     <span id="happinessCount">Sad Dog</h3>
                 <h3>Reward Count:
                     <span id="rewardCount">0</h3>
-                <span class="dog-image" id="koAlert" onchange="koAlert()"><img  src="assets/photos/dog-wagging-tail.jpg" alt=""></span>
-                <div>
-                    <button onClick="reward('earScratch',0)"><img class="button-image" src="assets/photos/pet.svg"> <p>Ear Scratches</p></button>
-                    <button onClick="reward('bellyRub',0)"><img class="button-image" src="assets/photos/belly-rub.png"> <p>Belly Rubs</p></button>
-                    <button onClick="reward('fetch',0)"><img class="button-image" src="assets/photos/ball.png"> <p>Fetch</p></button>
-                </div>
-                <div>
-                    <button class="btn-danger" id = "itemBtn" onClick="giveStatus('fat',0)">Fat</button>
-                    <button class="btn-primary" id = "itemBtn" onClick="giveStatus('lazy',0)">Lazy</button>
-                    <button class="btn-info" id = "itemBtn" onClick="giveStatus('hungry',0)">Hungry</button>
-                </div>
-                <div>
-                    <button class="btn-danger" onClick="reset(0)">Disappoint your animal again?</button>
-                </div>
-
             </div>
+
         </div>
+    </div>
     </div>
 
     <script src="game.js"></script>

@@ -4,8 +4,14 @@ var rewardCount = 0
 //var koAlert = '<img  src="https://media.giphy.com/media/kYnoJzl8aBWIU/giphy.gif">'
 var happinessElem = document.getElementById("happinessCount")
 var rewardCountElem = document.getElementById("rewardCount")
-var itemBtnElem = document.getElementById("itemBtn")
 //var koAlertElem = document.getElementById("koAlert")
+
+//animal variables
+var dog = new Animal("Bosco", "assets/photos/sir-bosco.jpg")
+var cat = new Animal("Sire Fluffy Pants", "assets/photos/dog-wagging-tail.jpg")
+//var fish = new Animal("Miss Bubbles", "assets/photos/dog-wagging-tail.jpg")
+
+animals.push(dog)
 
 //Animal constructor object
 function Animal(name, img) {
@@ -14,17 +20,34 @@ function Animal(name, img) {
     this.img = img
     this.items = []
     //available items
-    }
-
+}
 
 //setActiveAnimal
+function animalType(type, index){
+    var animal = animals[index]
+    if (type == "bosco"){
+        drawAnimal(animal.cat)
+    }
+}
+//function
+//for and if statements to determine dog type
 
-//animal variables
-var dog = new Animal("Bosco", "assets/photos/dog-wagging-tail.jpg")
-var cat = new Animal("Sire Fluffy Pants", "assets/photos/dog-wagging-tail.jpg")
-var fish = new Animal("Miss Bubbles", "assets/photos/dog-wagging-tail.jpg")
-
-animals.push(dog, cat, fish)
+function drawAnimal(index) {
+    var template = ``
+    var animalElem = document.getElementById("selectAnimal")
+    for (let i = 0; i < animals.length; i++) {
+        const animal = animals[index]
+        template += `
+        <div class="col-sm-4">
+                <h1>${animal.name}</h1>
+                <span id="koAlert" onchange="koAlert()">
+                    <img class="dog-image" src="${animal.img}">
+                </span>
+            </div>
+        `
+    }
+    animalElem.innerHTML = template
+}
 
 //reward function to determine the happiness increases.
 function reward(type, index) {
@@ -49,6 +72,7 @@ function Status(name, modifier, description, enabled) {
     this.description = description
     this.enabled = enabled // this object will eventually be how I make sure that status can only be applied once. Figure out how to identify if it's been clicked before and disable further clicks.
 }
+
 //Status dictionary for status modifiers
 var statusMods = {
     fat: new Status("Fat", 1, "Fatness decreases treat satisfaction!!", true),
@@ -61,17 +85,15 @@ function giveStatus(type, index, status) {
     var animal = animals[index]  //passing the index of the array into this function. Without it the array isn't being referenced for these properties.
     if (type == "fat") {
         animal.items.push(statusMods.fat)
-     } //have to have the "statusMods.fat" so the funciton can access the global variable.
-        if (animal.items.includes(statusMods.fat)){
+    } //have to have the "statusMods.fat" so the funciton can access the global variable.
+    if (!animal.items.includes(statusMods.fat)) {
         statusMods.fat.enabled = false //works to disable button after one click
     }
     if (type == "lazy") {
         animal.items.push(statusMods.lazy)
-        itemBtnElem.disabled = true // doesn't work to disable button after click.
     }
     if (type == "hungry") {
         animal.items.push(statusMods.hungry)
-        itemBtnElem.disabled = true
     }
     update(index)
 }
@@ -86,18 +108,11 @@ function addMods(index) {
     }
     return total
 }
-//total
-//look at an animals items array
-//for each item in the items array(using the .length ) add the modifier totoal
-//return total modifiers
-
-
 
 // update function to update the happiness level
 function update(index) {
     var animal = animals[index]
     happinessElem.innerText = animal.happiness
-
 }
 
 //reward counter function. Keeps the items from increasing the reward counter.
@@ -114,7 +129,7 @@ function rewardCounter(index) {
     }
 } */
 
-function reset(index){
+function reset(index) {
     var animal = animals[index]
     for (let i = 0; i < animals.length; i++) {
         const animal = animals[index];
@@ -129,3 +144,4 @@ function reset(index){
 
 update(0)
 rewardCounter(0)
+drawAnimal(0)
