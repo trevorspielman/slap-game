@@ -71,6 +71,9 @@ function reward(type, index) {
     if (type == "fetch") {
         animal.happiness += 10 + addMods(index)
     }
+    if(animal.happiness < 0){
+        animal.happiness = 0
+    }
     rewardCounter(index)
     update(index)
 }
