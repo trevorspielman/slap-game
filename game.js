@@ -4,6 +4,9 @@ var rewardCount = 0
 //var koAlert = '<img  src="https://media.giphy.com/media/kYnoJzl8aBWIU/giphy.gif">'
 var happinessElem = document.getElementById("happinessCount")
 var rewardCountElem = document.getElementById("rewardCount")
+var fatBtnElem = document.getElementById("fatBtn")
+var lazyBtnElem = document.getElementById("lazyBtn")
+var hungryBtnElem = document.getElementById("hungryBtn")
 //var koAlertElem = document.getElementById("koAlert")
 
 //animal variables
@@ -82,9 +85,9 @@ function Status(name, modifier, description, enabled) {
 
 //Status dictionary for status modifiers
 var statusMods = {
-    fat: new Status("Fat", 1, "Fatness decreases treat satisfaction!!", true),
-    lazy: new Status("Lazy", 5, "Honestly, who doesn't love belly rubs?", true),
-    hungry: new Status("Hungry", -2, "Full Belly = Happiness Eternal", true)
+    fat: new Status("Fat", 1, "Fatness decreases treat satisfaction!!", false),
+    lazy: new Status("Lazy", 5, "Honestly, who doesn't love belly rubs?", false),
+    hungry: new Status("Hungry", -2, "Full Belly = Happiness Eternal", false)
 }
 
 //function to push a status from the global items object into the items array on the target animal
@@ -92,15 +95,15 @@ function giveStatus(type, index, status) {
     var animal = animals[index]  //passing the index of the array into this function. Without it the array isn't being referenced for these properties.
     if (type == "fat") {
         animal.items.push(statusMods.fat)
-    } //have to have the "statusMods.fat" so the funciton can access the global variable.
-    if (!animal.items.includes(statusMods.fat)) {
-        statusMods.fat.enabled = false //works to disable button after one click
+        fatBtnElem.disabled = true
     }
     if (type == "lazy") {
         animal.items.push(statusMods.lazy)
+        lazyBtnElem.disabled = true
     }
     if (type == "hungry") {
         animal.items.push(statusMods.hungry)
+        hungryBtnElem.disabled = true
     }
     update(index)
 }
@@ -145,6 +148,9 @@ function reset(index) {
         animal.items = []
         happinessElem.innerText = animal.happiness
     }
+    fatBtnElem.disabled = false
+    lazyBtnElem.disabled = false
+    hungryBtnElem.disabled = false
     rewardCounter()
     update(0)
 }
