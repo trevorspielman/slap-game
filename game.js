@@ -101,19 +101,13 @@ function reward(type, index) {
 
 
 //function to push a status from the global items object into the items array on the target animal
-function giveStatus(type, index, status) {
+function giveStatus(type, index) {
+    debugger
     var animal = animals[index]  //passing the index of the array into this function. Without it the array isn't being referenced for these properties.
-    if (type == "fat") {
-        animal.items.push(statusMods.fat)
-        fatBtnElem.disabled = true
-    }
-    if (type == "lazy") {
-        animal.items.push(statusMods.lazy)
-        lazyBtnElem.disabled = true
-    }
-    if (type == "hungry") {
-        animal.items.push(statusMods.hungry)
-        hungryBtnElem.disabled = true
+    if (animal.items.includes(statusMods[type])) {
+        animal.items.pop(statusMods[type])
+    } else {
+        animal.items.push(statusMods[type])
     }
 
     update(index)
