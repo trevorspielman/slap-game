@@ -84,7 +84,7 @@ function reward(type, index) {
     }
     if (animal.happiness >= 100) {
         animal.happiness = 100
-        var animalElem = document.getElementById("selectAnimal")
+        var animalElem = document.getElementById("selectedAnimal")
         animalElem.innerHTML = `<span>
             <h1>HAPPINESS OVERLOAD!!!!</h1>
                 <p>The tail started wagging so fast the dog became a helicopter!!!</p>
@@ -101,14 +101,14 @@ function giveStatus(type, index) {
     var animal = animals[index]
     for (let i = 0; i < animals.length; i++) {
         const animal = animals[index];  //passing the index of the array into this function. Without it the array isn't being referenced for these properties.
-    if (animal.items.includes(statusMods[type])) {
-        animal.items = []
-    } else {
-        animal.items.push(statusMods[type])
-        drawStatus(type)
+        if (animal.items.includes(statusMods[type])) {
+            animal.items = []
+        } else {
+            animal.items.push(statusMods[type])
+            drawStatus(type)
+        }
+        update(index)
     }
-    update(index)
-}
 }
 
 function drawStatus(type) {
@@ -162,7 +162,6 @@ function reset(index) {
     rewardCounter()
     update(0)
     drawAnimal(index)
-    drawStatus(0)
 }
 
 update(0)
