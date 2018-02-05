@@ -3,9 +3,7 @@ var happiness = 0
 var rewardCount = 0
 var happinessElem = document.getElementById("happinessCount")
 var rewardCountElem = document.getElementById("rewardCount")
-var fatBtnElem = document.getElementById("fatBtn")
-var lazyBtnElem = document.getElementById("lazyBtn")
-var hungryBtnElem = document.getElementById("hungryBtn")
+var statusElem = document.getElementById("selectedStatus")
 
 //animal variables
 var dog1 = new Animal("Gentleman Bosco", "Loves Everything and Everyone in the world", "assets/photos/sir-bosco.jpg")
@@ -31,23 +29,21 @@ function Animal(name, description, img) {
 }
 
 //Status Modifier object
-function Status(name, modifier, description, enabled) {
+function Status(name, modifier, description) {
     this.name = name
     this.modifier = modifier
     this.description = description
-    this.enabled = enabled // this object will eventually be how I make sure that status can only be applied once. Figure out how to identify if it's been clicked before and disable further clicks.
 }
 
 //setActiveAnimal
-function animalType(type, index) {
-    var animal = animals[index]
-    if (type == "bosco") {
+function animalType(name) {
+    if (name == "bosco") {
         drawAnimal(0)
     }
-    if (type == "fluffyPants") {
+    if (name == "fluffyPants") {
         drawAnimal(1)
     }
-    if (type == "moonMoon") {
+    if (name == "moonMoon") {
         drawAnimal(2)
     }
 }
@@ -55,7 +51,7 @@ function animalType(type, index) {
 //drawing the animals to the page funciton
 function drawAnimal(index) {
     var template = ``
-    var animalElem = document.getElementById("selectAnimal")
+    var animalElem = document.getElementById("selectedAnimal")
     for (let i = 0; i < animals.length; i++) {
         const animal = animals[index]
         template = `
@@ -102,15 +98,32 @@ function reward(type, index) {
 
 //function to push a status from the global items object into the items array on the target animal
 function giveStatus(type, index) {
-    debugger
-    var animal = animals[index]  //passing the index of the array into this function. Without it the array isn't being referenced for these properties.
+    var animal = animals[index]
+    for (let i = 0; i < animals.length; i++) {
+        const animal = animals[index];  //passing the index of the array into this function. Without it the array isn't being referenced for these properties.
     if (animal.items.includes(statusMods[type])) {
-        animal.items.pop(statusMods[type])
+        animal.items = []
     } else {
         animal.items.push(statusMods[type])
+        drawStatus(type)
     }
-
     update(index)
+}
+}
+
+function drawStatus(type) {
+    var statusTemplate = ``
+    for (let i = 0; i < animals.length; i++) {
+        const statusMod = statusMods[type]
+        statusTemplate = `
+        <span>
+                <h3>${statusMod.name}</h3>
+                <p>${statusMod.description}</p>
+                <p>${statusMod.modifier} happiness point modifier</p>
+        </span>
+        `
+    }
+    statusElem.innerHTML = statusTemplate
 }
 
 //modifying the damage function
@@ -144,13 +157,12 @@ function reset(index) {
         animal.happiness = 0
         animal.items = []
         happinessElem.innerText = animal.happiness
+        statusElem.innerHTML = ``
     }
-    fatBtnElem.disabled = false
-    lazyBtnElem.disabled = false
-    hungryBtnElem.disabled = false
     rewardCounter()
     update(0)
     drawAnimal(index)
+    drawStatus(0)
 }
 
 update(0)
