@@ -1,13 +1,11 @@
 var animals = []
 var happiness = 0
 var rewardCount = 0
-//var koAlert = '<img  src="https://media.giphy.com/media/kYnoJzl8aBWIU/giphy.gif">'
 var happinessElem = document.getElementById("happinessCount")
 var rewardCountElem = document.getElementById("rewardCount")
 var fatBtnElem = document.getElementById("fatBtn")
 var lazyBtnElem = document.getElementById("lazyBtn")
 var hungryBtnElem = document.getElementById("hungryBtn")
-//var koAlertElem = document.getElementById("koAlert")
 
 //animal variables
 var dog1 = new Animal("Gentleman Bosco", "Loves Everything and Everyone in the world", "assets/photos/sir-bosco.jpg")
@@ -16,6 +14,13 @@ var dog3 = new Animal("Moon Moon", "LOL, I can hear the rocks!", "assets/photos/
 
 animals.push(dog1, dog2, dog3)
 
+//Status dictionary for status modifiers
+var statusMods = {
+    fat: new Status("Fat", 2, "Full Belly = Happiness Eternal", false),
+    lazy: new Status("Lazy", 5, "Honestly, who doesn't love belly rubs?", false),
+    hungry: new Status("Hungry", -5, "Ever heard of 'hangry'?", false)
+}
+
 //Animal constructor object
 function Animal(name, description, img) {
     this.name = name
@@ -23,19 +28,26 @@ function Animal(name, description, img) {
     this.happiness = 0
     this.img = img
     this.items = []
-    //available items
+}
+
+//Status Modifier object
+function Status(name, modifier, description, enabled) {
+    this.name = name
+    this.modifier = modifier
+    this.description = description
+    this.enabled = enabled // this object will eventually be how I make sure that status can only be applied once. Figure out how to identify if it's been clicked before and disable further clicks.
 }
 
 //setActiveAnimal
-function animalType(type, index){
+function animalType(type, index) {
     var animal = animals[index]
-    if (type == "bosco"){
+    if (type == "bosco") {
         drawAnimal(0)
     }
-    if (type == "fluffyPants"){
+    if (type == "fluffyPants") {
         drawAnimal(1)
     }
-    if (type == "moonMoon"){
+    if (type == "moonMoon") {
         drawAnimal(2)
     }
 }
@@ -50,7 +62,7 @@ function drawAnimal(index) {
         <span>
                 <h1>${animal.name}</h1>
                 <p>${animal.description}</p>
-                <span id="koAlert" onchange="koAlert()">
+                <span>
                     <img class="dog-image" src="${animal.img}">
                 </span>
         </span>
@@ -71,12 +83,13 @@ function reward(type, index) {
     if (type == "fetch") {
         animal.happiness += 10 + addMods(index)
     }
-    if(animal.happiness < 0){
+    if (animal.happiness < 0) {
         animal.happiness = 0
     }
-    if(animal.happiness >= 100){
+    if (animal.happiness >= 100) {
+        animal.happiness = 100
         var animalElem = document.getElementById("selectAnimal")
-            animalElem.innerHTML = `<span>
+        animalElem.innerHTML = `<span>
             <h1>HAPPINESS OVERLOAD!!!!</h1>
                 <p>The tail started wagging so fast the dog became a helicopter!!!</p>
                     <img class="dog-image" src="assets/photos/helicopter-dog.gif">
@@ -86,20 +99,6 @@ function reward(type, index) {
     update(index)
 }
 
-//Status Modifier object
-function Status(name, modifier, description, enabled) {
-    this.name = name
-    this.modifier = modifier
-    this.description = description
-    this.enabled = enabled // this object will eventually be how I make sure that status can only be applied once. Figure out how to identify if it's been clicked before and disable further clicks.
-}
-
-//Status dictionary for status modifiers
-var statusMods = {
-    fat: new Status("Fat", 1, "Fatness decreases treat satisfaction!!", false),
-    lazy: new Status("Lazy", 5, "Honestly, who doesn't love belly rubs?", false),
-    hungry: new Status("Hungry", -2, "Full Belly = Happiness Eternal", false)
-}
 
 //function to push a status from the global items object into the items array on the target animal
 function giveStatus(type, index, status) {
@@ -116,6 +115,7 @@ function giveStatus(type, index, status) {
         animal.items.push(statusMods.hungry)
         hungryBtnElem.disabled = true
     }
+
     update(index)
 }
 
