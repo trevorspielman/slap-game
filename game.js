@@ -74,6 +74,14 @@ function reward(type, index) {
     if(animal.happiness < 0){
         animal.happiness = 0
     }
+    if(animal.happiness >= 100){
+        var animalElem = document.getElementById("selectAnimal")
+            animalElem.innerHTML = `<span>
+            <h1>HAPPINESS OVERLOAD!!!!</h1>
+                <p>The tail started wagging so fast the dog became a helicopter!!!</p>
+                    <img class="dog-image" src="assets/photos/helicopter-dog.gif">
+                </span>`
+    }
     rewardCounter(index)
     update(index)
 }
@@ -134,14 +142,6 @@ function rewardCounter(index) {
     rewardCountElem.innerText = rewardCount++
 }
 
-/* function koAlert(index){
-    var animal = animals[index]
-    if(happiness >= 100){
-        koAlertElem.innerHTML = koAlert
-        return koAlert
-    }
-} */
-
 function reset(index) {
     var animal = animals[index]
     for (let i = 0; i < animals.length; i++) {
@@ -156,6 +156,7 @@ function reset(index) {
     hungryBtnElem.disabled = false
     rewardCounter()
     update(0)
+    drawAnimal(index)
 }
 
 update(0)
