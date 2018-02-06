@@ -103,6 +103,7 @@ function giveStatus(type, index) {
         const animal = animals[index];  //passing the index of the array into this function. Without it the array isn't being referenced for these properties.
         if (animal.items.includes(statusMods[type])) {
             animal.items = []
+            statusElem.innerHTML = ``
         } else {
             animal.items.push(statusMods[type])
             drawStatus(type)
